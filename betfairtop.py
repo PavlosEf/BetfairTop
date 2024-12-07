@@ -49,5 +49,14 @@ if st.sidebar.button("Calculate"):
         {
             "Outcome": ["Back Bet Wins", "Lay Bet Wins"],
             "Profit (£)": [results["Profit if Back Bet Wins"], results["Profit if Lay Bet Wins"]],
+        }
+    )
+else:
+    st.write("Please input values and click the **Calculate** button to see results.")
+
+# Footer
+st.markdown("---")
+st.write("Made with ❤️ by [Your Name](https://github.com/your-github-username)")
+
       
 #  Initial commit for betting calculator
