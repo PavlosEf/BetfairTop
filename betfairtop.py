@@ -56,7 +56,7 @@ else:
 
 # Footer
 st.markdown("---")
-st.write("Made with ❤️ by [Your Name](https://github.com/your-github-username)")
+
 
       
 #  Initial commit for betting calculator
