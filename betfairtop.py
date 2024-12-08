@@ -2,16 +2,30 @@ import streamlit as st
 
 # Function for calculation
 def calculate_back_lay_bet(back_stake, back_odds, lay_odds, commission):
+    """
+    Calculate the lay stake, liability, and profits for a back and lay bet.
+    """
+    # Formula for Lay Stake
     lay_stake = (back_stake * back_odds) / lay_odds
+
+    # Formula for Liability
     liability = lay_stake * (lay_odds - 1)
+
+    # Calculate Back Bet Wins
     back_bet_win = (back_stake * (back_odds - 1)) - liability
+
+    # Calculate Lay Bet Wins
     lay_bet_win = lay_stake * (1 - commission / 100)
 
+    # Calculate Market Profit and Commission
     market_profit = back_stake * (back_odds - 1) - liability
     commission_paid = lay_stake * (commission / 100)
+
+    # Calculate Net Profit and Yield
     net_profit = market_profit - commission_paid
     yield_percent = (net_profit / back_stake) * 100
 
+    # Return results
     return {
         "Lay Stake": round(lay_stake, 2),
         "Liability": round(liability, 2),
