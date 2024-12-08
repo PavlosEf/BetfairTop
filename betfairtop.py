@@ -36,8 +36,8 @@ with col1:
     lay_odds = st.number_input("Lay Odds (decimal):", min_value=1.01, value=2.4, step=0.01)
 
 with col2:
-    back_stake = st.number_input("Back Stake (£):", min_value=0.0, value=100.0, step=1.0)
-    commission = st.slider("Exchange Commission (%):", min_value=0.0, max_value=100.0, value=5.0)
+    back_stake = st.number_input("Back Stake (€):", min_value=0.0, value=100.0, step=1.0)
+    commission = st.number_input("Exchange Commission (%):", min_value=0.0, max_value=100.0, value=2.5)
 
 # Calculation Button
 if st.button("Calculate"):
@@ -49,17 +49,17 @@ if st.button("Calculate"):
     result_cols = st.columns([1, 1])
     with result_cols[0]:
         st.markdown("#### Wins")
-        st.markdown(f"Back Bet Profit: **£{results['Profit if Back Bet Wins']}**")
-        st.markdown(f"Market Profit: **£{results['Market Profit']}**")
-        st.markdown(f"Commission Paid: **£{results['Commission Paid']}**")
-        st.markdown(f"Net Profit: **£{results['Net Profit']}**")
+        st.markdown(f"Back Bet Profit: **€{results['Profit if Back Bet Wins']}**")
+        st.markdown(f"Market Profit: **€{results['Market Profit']}**")
+        st.markdown(f"Commission Paid: **€{results['Commission Paid']}**")
+        st.markdown(f"Net Profit: **€{results['Net Profit']}**")
         st.markdown(f"Yield: **{results['Yield']}%**")
 
     with result_cols[1]:
         st.markdown("#### Loses")
-        st.markdown(f"Lay Bet Profit: **£{results['Profit if Lay Bet Wins']}**")
-        st.markdown(f"Liability: **£{results['Liability']}**")
-        st.markdown(f"Net Profit: **£{results['Net Profit']}**")
+        st.markdown(f"Lay Bet Profit: **€{results['Profit if Lay Bet Wins']}**")
+        st.markdown(f"Liability: **€{results['Liability']}**")
+        st.markdown(f"Net Profit: **€{results['Net Profit']}**")
         st.markdown(f"Yield: **{results['Yield']}%**")
 
 # Style the Page
