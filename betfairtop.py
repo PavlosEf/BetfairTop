@@ -29,8 +29,8 @@ def calculate_back_lay_bet(back_stake, back_odds, lay_odds):
     }
 
 # Layout
-st.title("Minimal Lay Bet Calculator")
-st.markdown("Calculate lay stakes, liabilities, and profits for betting scenarios.")
+st.title("Lay Bet Calculator")
+st.markdown("Calculate lay stakes, liabilities, and profits for betting scenarios on Top Price Market prices.")
 
 # Input Fields
 st.markdown("### Input Parameters")
