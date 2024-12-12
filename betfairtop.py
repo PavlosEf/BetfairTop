@@ -48,9 +48,25 @@ with st.container():
         commission = st.number_input("Commission (%)", min_value=0.0, max_value=100.0, value=2.5, step=0.1)
 
 # Calculate Lay Stake on Input
-lay_stake = round((back_stake * back_odds) / lay_odds, 2)
-total_stake = round(back_stake + lay_stake, 2)
-st.markdown(f"### Calculated Lay Stake: €{lay_stake} (Total Stake: €{total_stake})")
+calculated_lay_stake = (back_stake * back_odds) / lay_odds
+calculated_total_stake = back_stake + calculated_lay_stake
+
+# Dynamic Input Boxes for Lay Stake and Total Stake
+col1, col2 = st.columns([1, 1])
+with col1:
+    lay_stake = st.number_input(
+        "Lay Stake (€)", min_value=0.0, value=round(calculated_lay_stake, 2), step=0.01
+    )
+with col2:
+    total_stake = st.number_input(
+        "Total Stake (€)", min_value=0.0, value=round(calculated_total_stake, 2), step=0.01
+    )
+
+# Adjust Lay Stake and Total Stake Dynamically
+if lay_stake != round(calculated_lay_stake, 2):
+    total_stake = back_stake + lay_stake
+elif total_stake != round(calculated_total_stake, 2):
+    lay_stake = total_stake - back_stake
 
 # Calculation Button
 if st.button("Calculate"):
