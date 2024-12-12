@@ -100,13 +100,13 @@ if st.button("Calculate"):
         }}
         </style>
         <div class="result-box">
-            <h4>If Win:</h4>
+            <h4>If Back Win:</h4>
             <ul>
                 <li>Back Bet Profit: €{results['Back Bet Profit Win']}</li>
                 <li>Lay Bet Profit: €{results['Lay Bet Profit Win']}</li>
                 <li>Market Profit: €{results['Market Profit Win']}</li>
             </ul>
-            <h4>If Lose:</h4>
+            <h4>If Back Lose:</h4>
             <ul>
                 <li>Back Bet Profit: €{results['Back Bet Profit Lose']}</li>
                 <li>Lay Bet Profit: €{results['Lay Bet Profit Lose']}</li>
@@ -120,4 +120,4 @@ if st.button("Calculate"):
 
 # Footer
 st.markdown("---")
-st.markdown("Designed for minimalistic and effective betting calculations.")
+
