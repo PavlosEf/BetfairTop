@@ -80,16 +80,27 @@ if st.button("Calculate"):
         f"""
         <style>
         .result-box {{
-            background-color: #F8F9FA;
+            background-color: #3E4E56;
             border: 1px solid #DEE2E6;
             border-radius: 8px;
             padding: 15px;
             margin: 10px;
-            text-align: left;
+            color: #FFFFFF;
+        }}
+        .result-box h4 {{
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }}
+        .result-box ul {{
+            list-style-type: none;
+            padding: 0;
+        }}
+        .result-box ul li {{
+            margin-bottom: 5px;
         }}
         </style>
         <div class="result-box">
-            <b>If Win:</b>
+            <h4>If Win:</h4>
             <ul>
                 <li>Back Bet Profit: €{results['Back Bet Profit Win']}</li>
                 <li>Lay Bet Profit: €{results['Lay Bet Profit Win']}</li>
@@ -97,7 +108,7 @@ if st.button("Calculate"):
                 <li>Commission Paid: €{results['Commission Paid']}</li>
                 <li>Net Profit: €{results['Net Profit Win']}</li>
             </ul>
-            <b>If Lose:</b>
+            <h4>If Lose:</h4>
             <ul>
                 <li>Back Bet Profit: €{results['Back Bet Profit Lose']}</li>
                 <li>Lay Bet Profit: €{results['Lay Bet Profit Lose']}</li>
