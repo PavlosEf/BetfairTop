@@ -4,13 +4,18 @@ import streamlit as st
 def calculate_back_lay_bet(back_stake, back_odds, lay_odds):
     lay_stake = (back_stake * back_odds) / lay_odds
     liability = lay_stake * (lay_odds - 1)
-    back_bet_profit_win = back_stake * (back_odds - 1) - liability
-    back_bet_profit_lose = -back_stake
-    lay_bet_profit_win = lay_stake
-    lay_bet_profit_lose = -liability
 
+    # Back Bet Outcomes
+    back_bet_profit_win = back_stake * (back_odds - 1)  # Profit when back bet wins
+    back_bet_profit_lose = -back_stake  # Loss when back bet loses
+
+    # Lay Bet Outcomes
+    lay_bet_profit_win = -liability  # Loss when lay bet loses
+    lay_bet_profit_lose = lay_stake  # Profit when lay bet wins
+
+    # Market Profit (combined outcomes)
     market_profit_win = back_bet_profit_win + lay_bet_profit_win
-    market_profit_lose = lay_bet_profit_lose + back_bet_profit_lose
+    market_profit_lose = back_bet_profit_lose + lay_bet_profit_lose
 
     return {
         "Lay Stake": round(lay_stake, 2),
