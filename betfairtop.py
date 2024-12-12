@@ -1,20 +1,16 @@
 import streamlit as st
 
 # Function for calculation
-def calculate_back_lay_bet(back_stake, back_odds, lay_odds, commission):
+def calculate_back_lay_bet(back_stake, back_odds, lay_odds):
     lay_stake = (back_stake * back_odds) / lay_odds
     liability = lay_stake * (lay_odds - 1)
     back_bet_profit_win = back_stake * (back_odds - 1) - liability
     back_bet_profit_lose = -back_stake
-    lay_bet_profit_win = lay_stake * (1 - commission / 100)
+    lay_bet_profit_win = lay_stake
     lay_bet_profit_lose = -liability
 
     market_profit_win = back_bet_profit_win + lay_bet_profit_win
     market_profit_lose = lay_bet_profit_lose + back_bet_profit_lose
-
-    commission_paid = lay_stake * (commission / 100)
-    net_profit_win = market_profit_win - commission_paid
-    net_profit_lose = market_profit_lose - commission_paid
 
     return {
         "Lay Stake": round(lay_stake, 2),
@@ -25,9 +21,6 @@ def calculate_back_lay_bet(back_stake, back_odds, lay_odds, commission):
         "Lay Bet Profit Lose": round(lay_bet_profit_lose, 2),
         "Market Profit Win": round(market_profit_win, 2),
         "Market Profit Lose": round(market_profit_lose, 2),
-        "Commission Paid": round(commission_paid, 2),
-        "Net Profit Win": round(net_profit_win, 2),
-        "Net Profit Lose": round(net_profit_lose, 2),
     }
 
 # Layout
@@ -37,15 +30,13 @@ st.markdown("Calculate lay stakes, liabilities, and profits for betting scenario
 # Input Fields
 st.markdown("### Input Parameters")
 with st.container():
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+    col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         back_odds = st.number_input("Back Odds", min_value=1.01, value=2.5, step=0.01)
     with col2:
         lay_odds = st.number_input("Lay Odds", min_value=1.01, value=2.4, step=0.01)
     with col3:
         back_stake = st.number_input("Back Stake (€)", min_value=0.0, value=100.0, step=1.0)
-    with col4:
-        commission = st.number_input("Commission (%)", min_value=0.0, max_value=100.0, value=2.5, step=0.1)
 
 # Calculate Lay Stake on Input
 calculated_lay_stake = (back_stake * back_odds) / lay_odds
@@ -70,7 +61,7 @@ elif total_stake != round(calculated_total_stake, 2):
 
 # Calculation Button
 if st.button("Calculate"):
-    results = calculate_back_lay_bet(back_stake, back_odds, lay_odds, commission)
+    results = calculate_back_lay_bet(back_stake, back_odds, lay_odds)
 
     # Display Results
     st.markdown("### Results Breakdown")
@@ -98,6 +89,10 @@ if st.button("Calculate"):
         .result-box ul li {{
             margin-bottom: 5px;
         }}
+        .warning {{
+            color: red;
+            font-weight: bold;
+        }}
         </style>
         <div class="result-box">
             <h4>If Win:</h4>
@@ -105,18 +100,15 @@ if st.button("Calculate"):
                 <li>Back Bet Profit: €{results['Back Bet Profit Win']}</li>
                 <li>Lay Bet Profit: €{results['Lay Bet Profit Win']}</li>
                 <li>Market Profit: €{results['Market Profit Win']}</li>
-                <li>Commission Paid: €{results['Commission Paid']}</li>
-                <li>Net Profit: €{results['Net Profit Win']}</li>
             </ul>
             <h4>If Lose:</h4>
             <ul>
                 <li>Back Bet Profit: €{results['Back Bet Profit Lose']}</li>
                 <li>Lay Bet Profit: €{results['Lay Bet Profit Lose']}</li>
                 <li>Market Profit: €{results['Market Profit Lose']}</li>
-                <li>Commission Paid: €{results['Commission Paid']}</li>
-                <li>Net Profit: €{results['Net Profit Lose']}</li>
             </ul>
         </div>
+        <p class="warning">In case the outcome confirms in Exchange it will be applied a Commission (%) on the NET winnings. Most exchanges are on 2%.</p>
         """,
         unsafe_allow_html=True,
     )
